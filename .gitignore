@@ -1,0 +1,4 @@
+*.pyc
+.on-save.json
+.venv
+.mypy_cache
