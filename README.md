@@ -12,7 +12,7 @@ PIPENV_VENV_IN_PROJECT=1 pipenv shell
 1. Update destination repository (master and release branch)
 2. Run:
 ```
-python describer.py --path=<path> --branch==<branch name>
+python describer.py --path=<path> --branch=<branch name>
 ```
 
 ## TODO:

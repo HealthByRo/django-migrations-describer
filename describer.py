@@ -1,3 +1,5 @@
+import os
+
 import click
 import git
 
@@ -16,6 +18,8 @@ def main(path: str = "", branch: str = "") -> None:
     for index in past.diff(current).iter_change_type("A"):
         if "migrations" in index.b_path:
             click.secho(index.b_path)
+            with open(os.path.join(path, index.b_path)) as f:
+                click.echo(f.read())
 
 
 if __name__ == "__main__":
