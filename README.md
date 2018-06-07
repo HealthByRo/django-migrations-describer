@@ -16,12 +16,11 @@ python describer.py --path=<path> --branch=<branch name>
 ```
 
 ## TODO:
-* auto update repository
-* parse files
+ * auto update repository
  * table added
  * table deleted
- * field added
  * field modified
  * index added
  * index removed
- * data migration (allow user put comment or read doc from function)
+ * data migration (print and allow user put comment or read doc from function)
+ * check module if custom table is set

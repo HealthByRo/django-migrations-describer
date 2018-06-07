@@ -1,9 +1,18 @@
+import importlib.util
 import os
 
 import click
 import git
+from django.conf import settings
+from django.db import migrations
 
 SKIP_FILES = ["__init__.py", "__pycache__"]
+
+
+def get_table_name(path, model):
+    # TODO: check module if custom table
+    module = path.split("/")[1]
+    return "__".join([module, model]).lower()
 
 
 @click.command()
@@ -15,11 +24,36 @@ def main(path: str = "", branch: str = "") -> None:
 
     current = repo.commit(branch)
     past = repo.commit("master")
+    settings.configure()
+    description = []
     for index in past.diff(current).iter_change_type("A"):
         if "migrations" in index.b_path:
-            click.secho(index.b_path)
-            with open(os.path.join(path, index.b_path)) as f:
-                click.echo(f.read())
+            spec = importlib.util.spec_from_file_location(
+                "Migration", os.path.join(path, index.b_path)
+            )
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            klass = mod.Migration
+            for operation in klass.operations:
+                if isinstance(operation, migrations.AddField):
+                    table_name = get_table_name(index.b_path, operation.model_name)
+                    description.append(
+                        f"Added field `{operation.name}` to table `{table_name}`"
+                    )
+                else:
+                    with open(os.path.join(path, index.b_path)) as f:
+                        # click.echo(operation)
+
+                        click.echo(index.b_path)
+                        click.echo(f.read())
+                        description.append(
+                            click.prompt(
+                                "Operation not supported yet. Please read the above file content and describe the change"
+                            )
+                        )
+
+    if description:
+        click.echo("\n".join(description))
 
 
 if __name__ == "__main__":

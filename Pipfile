@@ -9,6 +9,7 @@ name = "pypi"
 
 click = "*"
 gitpython = "*"
+django = "==1.11.13"
 
 
 [dev-packages]

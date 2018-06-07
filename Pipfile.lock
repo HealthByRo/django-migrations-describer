@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3bd3ec0cd0b6c5dbb56d655422515c3a6ca9a1e954f132166a318d2b8527eb4a"
+            "sha256": "ad00a1fe85cc9de58e115ace8bdf65a679a764ab3918b7b96345b855323fa7ec"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,13 @@
             ],
             "version": "==6.7"
         },
+        "django": {
+            "hashes": [
+                "sha256:18986bcffe69653a84eaf1faa1fa5a7eded32cee41cfecc77fdc65a3e046404d",
+                "sha256:46adfe8e0abe4d1f026c1086889970b611aec492784fbdfbdaabc2457360a4a5"
+            ],
+            "version": "==1.11.13"
+        },
         "gitdb2": {
             "hashes": [
                 "sha256:b60e29d4533e5e25bb50b7678bbc187c8f6bcff1344b4f293b2ba55c85795f09",
@@ -36,6 +43,13 @@
                 "sha256:b60b045cf64a321e5b620debb49890099fa6c7be6dfb7fb249027e5d34227301"
             ],
             "version": "==2.1.10"
+        },
+        "pytz": {
+            "hashes": [
+                "sha256:65ae0c8101309c45772196b21b74c46b2e5d11b6275c45d251b150d5da334555",
+                "sha256:c06425302f2cf668f1bba7a0a03f3c1d34d4ebeef2c72003da308b3947c7f749"
+            ],
+            "version": "==2018.4"
         },
         "smmap2": {
             "hashes": [
