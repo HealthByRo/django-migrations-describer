@@ -4,7 +4,7 @@ import os
 import click
 import git
 from django.conf import settings
-from django.db import migrations
+from django.db import migrations, models
 
 SKIP_FILES = ["__init__.py", "__pycache__"]
 
@@ -37,9 +37,23 @@ def main(path: str = "", branch: str = "") -> None:
             for operation in klass.operations:
                 if isinstance(operation, migrations.AddField):
                     table_name = get_table_name(index.b_path, operation.model_name)
-                    description.append(
-                        f"Added field `{operation.name}` to table `{table_name}`"
-                    )
+                    field = operation.name
+                    if isinstance(operation.field, models.fields.related.ForeignKey):
+                        field += "_id"
+                    elif isinstance(operation.field, models.ManyToManyField):
+                        table_name = get_table_name(
+                            index.b_path,
+                            "_".join([operation.model_name, operation.name]),
+                        )
+                        description.append(f"Added table `{table_name}`")
+                        continue
+                    description.append(f"Added field `{field}` to table `{table_name}`")
+                elif isinstance(operation, migrations.CreateModel):
+                    table_name = get_table_name(index.b_path, operation.name)
+                    description.append(f"Added table `{table_name}`")
+                elif isinstance(operation, migrations.AlterField):
+                    table_name = get_table_name(index.b_path, operation.model_name)
+                    description.append(f"Updated field `{table_name}.{operation.name}`")
                 else:
                     with open(os.path.join(path, index.b_path)) as f:
                         # click.echo(operation)

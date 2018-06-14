@@ -17,9 +17,7 @@ python describer.py --path=<path> --branch=<branch name>
 
 ## TODO:
  * auto update repository
- * table added
  * table deleted
- * field modified
  * index added
  * index removed
  * data migration (print and allow user put comment or read doc from function)
