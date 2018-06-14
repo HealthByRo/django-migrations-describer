@@ -55,11 +55,11 @@ def main(path: str = "", branch: str = "") -> None:
                     table_name = get_table_name(index.b_path, operation.model_name)
                     description.append(f"Updated field `{table_name}.{operation.name}`")
                 else:
-                    with open(os.path.join(path, index.b_path)) as f:
+                    with open(os.path.join(path, index.b_path)) as f_obj:
                         # click.echo(operation)
 
                         click.echo(index.b_path)
-                        click.echo(f.read())
+                        click.echo(f_objs.read())
                         description.append(
                             click.prompt(
                                 "Operation not supported yet. ",
