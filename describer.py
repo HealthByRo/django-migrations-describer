@@ -9,7 +9,7 @@ from django.db import migrations, models
 SKIP_FILES = ["__init__.py", "__pycache__"]
 
 
-def get_table_name(path, model):
+def get_table_name(path: str, model: str):
     # TODO: check module if custom table
     module = path.split("/")[1]
     return "__".join([module, model]).lower()
@@ -62,7 +62,8 @@ def main(path: str = "", branch: str = "") -> None:
                         click.echo(f.read())
                         description.append(
                             click.prompt(
-                                "Operation not supported yet. Please read the above file content and describe the change"
+                                "Operation not supported yet. ",
+                                "Please read the above file content and describe the change",
                             )
                         )
 
