@@ -21,9 +21,10 @@ def get_table_name(path: str, model: str):
 def main(path: str = "", branch: str = "") -> None:
     """Django Migrations Describer"""
     repo = git.Repo(path)
+    repo.remotes["origin"].fetch()
 
-    current = repo.commit(branch)
-    past = repo.commit("master")
+    current = repo.commit("origin/" + branch)
+    past = repo.commit("origin/master")
     settings.configure()
     description = []
     for index in past.diff(current).iter_change_type("A"):

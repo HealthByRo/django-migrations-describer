@@ -16,7 +16,6 @@ python describer.py --path=<path> --branch=<branch name>
 ```
 
 ## TODO:
- * auto update repository
  * table deleted
  * index added
  * index removed
