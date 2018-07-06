@@ -60,7 +60,7 @@ def main(path: str = "", branch: str = "") -> None:
                         # click.echo(operation)
 
                         click.echo(index.b_path)
-                        click.echo(f_objs.read())
+                        click.echo(f_obj.read())
                         description.append(
                             click.prompt(
                                 "Operation not supported yet. ",
