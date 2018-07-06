@@ -55,6 +55,11 @@ def main(path: str = "", branch: str = "") -> None:
                 elif isinstance(operation, migrations.AlterField):
                     table_name = get_table_name(index.b_path, operation.model_name)
                     description.append(f"Updated field `{table_name}.{operation.name}`")
+                elif isinstance(operation, migrations.RenameField):
+                    table_name = get_table_name(index.b_path, operation.model_name)
+                    description.append(
+                        f"Renamed field `{table_name}.{operation.old_name}` to `{table_name}.{operation.new_name}`"
+                    )
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
                         # click.echo(operation)
