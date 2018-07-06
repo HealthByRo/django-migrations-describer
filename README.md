@@ -17,6 +17,7 @@ python describer.py --path=<path> --branch=<branch name>
 
 ## TODO:
  * table deleted
+ * table renamed
  * index added
  * index removed
  * data migration (print and allow user put comment or read doc from function)
