@@ -12,7 +12,7 @@ SKIP_FILES = ["__init__.py", "__pycache__"]
 def get_table_name(path: str, model: str):
     # TODO: check module if custom table
     module = path.split("/")[1]
-    return "__".join([module, model]).lower()
+    return "_".join([module, model]).lower()
 
 
 @click.command()
