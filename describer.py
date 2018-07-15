@@ -37,6 +37,9 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
     description = []
     for index in past.diff(current).iter_change_type("A"):
         if "migrations" in index.b_path:
+            if "__init__.py" in index.b_path:
+                continue
+
             spec = importlib.util.spec_from_file_location(
                 "Migration", os.path.join(path, index.b_path)
             )
