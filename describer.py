@@ -1,7 +1,9 @@
 import importlib.util
 import os
+import sys
 
 import click
+
 import git
 from django.conf import settings
 from django.db import migrations, models
@@ -18,8 +20,14 @@ def get_table_name(path: str, model: str):
 @click.command()
 @click.option("--path", prompt="Workspace path", help="Path to the workspace")
 @click.option("--branch", prompt="Branch name", help="Branch name")
-def main(path: str = "", branch: str = "") -> None:
+@click.option(
+    "--venv", prompt="Project virtual env", help="Path to project virtual env"
+)
+def main(path: str = "", branch: str = "", venv: str = "") -> None:
     """Django Migrations Describer"""
+    sys.path.append(path)
+    sys.path.append(venv)
+
     repo = git.Repo(path)
     repo.remotes["origin"].fetch()
 
