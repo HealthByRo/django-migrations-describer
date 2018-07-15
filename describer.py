@@ -74,6 +74,10 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
                 elif isinstance(operation, migrations.DeleteModel):
                     table_name = get_table_name(index.b_path, operation.name)
                     description.append(f"Deleted table `{table_name}`")
+                elif isinstance(operation, migrations.RunPython):
+                    description.append(
+                        f"Data Migration: " + operation.code.__doc__.strip()
+                    )
                 elif isinstance(operation, migrations.AlterUniqueTogether):
                     table_name = get_table_name(index.b_path, operation.name)
                     for fields in operation.unique_together:

@@ -19,5 +19,4 @@ python describer.py --path=<path> --branch=<branch name>
  * table renamed
  * index added
  * index removed
- * data migration (print and allow user put comment or read doc from function)
  * check module if custom table is set
