@@ -2,3 +2,4 @@
 .on-save.json
 .venv
 .mypy_cache
+.vscode
