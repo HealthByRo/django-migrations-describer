@@ -16,7 +16,6 @@ python describer.py --path=<path> --branch=<branch name>
 ```
 
 ## TODO:
- * table deleted
  * table renamed
  * index added
  * index removed

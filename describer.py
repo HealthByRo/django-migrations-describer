@@ -68,6 +68,9 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
                     description.append(
                         f"Renamed field `{table_name}.{operation.old_name}` to `{table_name}.{operation.new_name}`"
                     )
+                elif isinstance(operation, migrations.DeleteModel):
+                    table_name = get_table_name(index.b_path, operation.name)
+                    description.append(f"Deleted table `{table_name}`")
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
                         # click.echo(operation)
