@@ -74,6 +74,13 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
                 elif isinstance(operation, migrations.DeleteModel):
                     table_name = get_table_name(index.b_path, operation.name)
                     description.append(f"Deleted table `{table_name}`")
+                elif isinstance(operation, migrations.AlterUniqueTogether):
+                    table_name = get_table_name(index.b_path, operation.name)
+                    for fields in operation.unique_together:
+                        fields = ", ".join(fields)
+                        description.append(
+                            f"Added or updated Index for fields `{fields}` on table `{table_name}`"
+                        )
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
                         # click.echo(operation)
