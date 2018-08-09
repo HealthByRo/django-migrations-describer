@@ -5,7 +5,7 @@ import sys
 import click
 
 import git
-from django.conf import settings
+import django
 from django.db import migrations, models
 
 SKIP_FILES = ["__init__.py", "__pycache__"]
@@ -40,7 +40,11 @@ def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> 
 
     current = repo.commit("origin/" + branch)
     past = repo.commit("origin/master")
-    settings.configure()
+
+    project_name = path.split("/")[-1]
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
+
+    django.setup()
     description = []
     for index in past.diff(current).iter_change_type("A"):
         if "migrations" in index.b_path:
