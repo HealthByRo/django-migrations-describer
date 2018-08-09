@@ -23,10 +23,19 @@ def get_table_name(path: str, model: str):
 @click.option(
     "--venv", prompt="Project virtual env", help="Path to project virtual env"
 )
-def main(path: str = "", branch: str = "", venv: str = "") -> None:
+@click.option("--ignore", help="Comma separated list of up to migrations to ignore")
+def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> None:
     """Django Migrations Describer"""
     sys.path.append(path)
     sys.path.append(venv)
+
+    ignores = {}
+    if ignore:
+        for i in ignore.split(","):
+            i = i.split(".")
+            ignores[i[0]] = int(i[1].split("_")[0]), i[1]
+
+    print("i", ignores)
 
     repo = git.Repo(path)
     repo.remotes["origin"].fetch()
@@ -40,9 +49,16 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
             if "__init__.py" in index.b_path:
                 continue
 
-            spec = importlib.util.spec_from_file_location(
-                "Migration", os.path.join(path, index.b_path)
-            )
+            migration_path = os.path.join(path, index.b_path)
+            module_name, _, migration_name = index.b_path[:-3].split("/")[:3]
+            if ignores.get(module_name):
+                migration_no = int(migration_name.split("_")[0])
+                if (
+                    ignores[module_name][0] > migration_no
+                    or ignores[module_name][1] == migration_name
+                ):
+                    continue
+            spec = importlib.util.spec_from_file_location("Migration", migration_path)
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             klass = mod.Migration
