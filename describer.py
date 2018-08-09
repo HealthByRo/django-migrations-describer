@@ -75,6 +75,10 @@ def main(path: str = "", branch: str = "", venv: str = "") -> None:
                     table_name = get_table_name(index.b_path, operation.name)
                     description.append(f"Deleted table `{table_name}`")
                 elif isinstance(operation, migrations.RunPython):
+                    if not operation.code.__doc__:
+                        raise Exception(
+                            f"Missing migration description in {migration_path}"
+                        )
                     description.append(
                         f"Data Migration: " + operation.code.__doc__.strip()
                     )
