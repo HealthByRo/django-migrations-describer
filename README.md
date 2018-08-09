@@ -20,7 +20,6 @@ python describer.py --path=<path> --branch=<branch name>
 * `--ignore` - Comma separated list of up to migrations to ignore
 
 ## TODO:
- * table renamed
  * index added
  * index removed
  * check module if custom table is set
