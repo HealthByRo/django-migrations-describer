@@ -15,6 +15,10 @@ PIPENV_VENV_IN_PROJECT=1 pipenv shell
 python describer.py --path=<path> --branch=<branch name>
 ```
 
+## Optional parameters
+* `--venv` - Path to project virtual env
+* `--ignore` - Comma separated list of up to migrations to ignore
+
 ## TODO:
  * table renamed
  * index added
