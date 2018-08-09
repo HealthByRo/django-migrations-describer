@@ -35,8 +35,6 @@ def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> 
             i = i.split(".")
             ignores[i[0]] = int(i[1].split("_")[0]), i[1]
 
-    print("i", ignores)
-
     repo = git.Repo(path)
     repo.remotes["origin"].fetch()
 
@@ -107,8 +105,7 @@ def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> 
                         )
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
-                        # click.echo(operation)
-
+                        click.echo(operation)
                         click.echo(index.b_path)
                         click.echo(f_obj.read())
                         description.append(
