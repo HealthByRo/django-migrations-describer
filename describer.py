@@ -106,6 +106,11 @@ def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> 
                 elif isinstance(operation, migrations.RemoveField):
                     table_name = get_table_name(index.b_path, operation.name)
                     description.append(f"Removed field `{table_name}.{operation.name}`")
+                elif isinstance(operation, migrations.AlterModelOptions):
+                    table_name = get_table_name(index.b_path, operation.name)
+                    description.append(
+                        f"Updated model options `{operation.options}`` on table `{table_name}`"
+                    )
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
                         click.echo(operation)
