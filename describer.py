@@ -19,12 +19,19 @@ def get_table_name(path: str, model: str):
 
 @click.command()
 @click.option("--path", prompt="Workspace path", help="Path to the workspace")
-@click.option("--branch", prompt="Branch name", help="Branch name")
+@click.option("--branch", help="Branch name", default="develop")
+@click.option("--base-branch", help="Base branch name", default="master")
 @click.option(
     "--venv", prompt="Project virtual env", help="Path to project virtual env"
 )
 @click.option("--ignore", help="Comma separated list of up to migrations to ignore")
-def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> None:
+def main(
+    path: str = "",
+    branch: str = "develop",
+    base_branch: str = "master",
+    venv: str = "",
+    ignore: str = "",
+) -> None:
     """Django Migrations Describer"""
     sys.path.append(path)
     sys.path.append(venv)
@@ -39,7 +46,7 @@ def main(path: str = "", branch: str = "", venv: str = "", ignore: str = "") -> 
     repo.remotes["origin"].fetch()
 
     current = repo.commit("origin/" + branch)
-    past = repo.commit("origin/master")
+    past = repo.commit("origin/" + base_branch)
 
     project_name = path.split("/")[-1]
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
