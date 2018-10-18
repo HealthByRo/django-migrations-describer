@@ -54,7 +54,7 @@ def main(
     django.setup()
     description = []
     for index in past.diff(current).iter_change_type("A"):
-        if "migrations" in index.b_path:
+        if "/migrations/" in index.b_path:
             if "__init__.py" in index.b_path:
                 continue
 
