@@ -126,6 +126,11 @@ def main(
                     old_name = get_table_name(index.b_path, operation.old_name)
                     new_name = get_table_name(index.b_path, operation.new_name)
                     description.append(f"Renamed table `{old_name}` to `{new_name}`")
+
+                # ignore non-Django operations
+                elif operation.__class__.__module__.split(".")[0] != "django":
+                    pass
+
                 else:
                     with open(os.path.join(path, index.b_path)) as f_obj:
                         click.echo(operation)
