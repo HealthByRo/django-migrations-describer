@@ -12,14 +12,15 @@ PIPENV_VENV_IN_PROJECT=1 pipenv shell
 1. Update destination repository (eg. release branch)
 2. Run:
 ```
-python describer.py --path=<path> --branch=<branch name>
+python describer.py --path=<path to project> --start-ref=<git ref>
 ```
 
-## Optional parameters
-* `--venv` - Path to project virtual env
+## Parameters
+* `--path` - Path to project
+* `--start-ref` - Git ref (e.g. commit or tag) that we start the diff from
+* `--end-ref` - Git ref (e.g. commit or tag) that we end the diff at, defaults to `master`
+* `--venv` - Path to project's virtual env
 * `--ignore` - Comma separated list of up to migrations to ignore
-* `--branch` - Branch name to compare
-* `--base-branch` - Base branch name to compare
 
 ## TODO:
  * index added
