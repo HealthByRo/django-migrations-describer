@@ -19,16 +19,16 @@ def get_table_name(path: str, model: str):
 
 @click.command()
 @click.option("--path", prompt="Workspace path", help="Path to the workspace")
-@click.option("--branch", help="Branch name", default="develop")
-@click.option("--base-branch", help="Base branch name", default="master")
+@click.option("--start-ref", help="Start ref for diff, e.g. commit or tag")
+@click.option("--end-ref", help="End ref for diff, e.g. commit or tag", default="master")
 @click.option(
     "--venv", prompt="Project virtual env", help="Path to project virtual env"
 )
 @click.option("--ignore", help="Comma separated list of up to migrations to ignore")
 def main(
-    path: str = "",
-    branch: str = "develop",
-    base_branch: str = "master",
+    path: str,
+    start_ref: str,
+    end_ref: str,
     venv: str = "",
     ignore: str = "",
 ) -> None:
@@ -45,8 +45,8 @@ def main(
     repo = git.Repo(path)
     repo.remotes["origin"].fetch()
 
-    current = repo.commit("origin/" + branch)
-    past = repo.commit("origin/" + base_branch)
+    current = repo.commit(end_ref)
+    past = repo.commit(start_ref)
 
     project_name = path.split("/")[-1]
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
