@@ -24,6 +24,13 @@
             "index": "pypi",
             "version": "==7.0"
         },
+        "ddt": {
+            "hashes": [
+                "sha256:474546b4020ce8a2f9550ba8899c28aa2c284c7bbf175bddede98be949d1ca7c",
+                "sha256:d13e6af8f36238e89d00f4ebccf2bda4f6d1878be560a6600689e42077e164e3"
+            ],
+            "version": "==1.2.1"
+        },
         "django": {
             "hashes": [
                 "sha256:753d30d3eb078064d2ddadfea65083c9848074a7f93d7b4dc7fa6b1380d278f5",
@@ -31,6 +38,12 @@
             ],
             "index": "pypi",
             "version": "==2.2.2"
+        },
+        "gitdb": {
+            "hashes": [
+                "sha256:a3ebbc27be035a2e874ed904df516e35f4a29a778a764385de09de9e0f139658"
+            ],
+            "version": "==0.6.4"
         },
         "gitdb2": {
             "hashes": [
@@ -41,11 +54,11 @@
         },
         "gitpython": {
             "hashes": [
-                "sha256:563221e5a44369c6b79172f455584c9ebbb122a13368cc82cb4b5addff788f82",
-                "sha256:8237dc5bfd6f1366abeee5624111b9d6879393d84745a507de0fda86043b65a8"
+                "sha256:7428f1cc5e72d53e65c3259d5cebc22fb2b07f973c49d95b3c3d26c64890a3c3",
+                "sha256:a0f744a4941eac5d99033eb0adcbec83bf443ee173fda4292d92a906aedce952"
             ],
             "index": "pypi",
-            "version": "==2.1.11"
+            "version": "==2.1.12"
         },
         "pytz": {
             "hashes": [
@@ -53,6 +66,12 @@
                 "sha256:d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141"
             ],
             "version": "==2019.1"
+        },
+        "smmap": {
+            "hashes": [
+                "sha256:0e2b62b497bd5f0afebc002eda4d90df9d209c30ef257e8673c90a6b5c119d62"
+            ],
+            "version": "==0.9.0"
         },
         "smmap2": {
             "hashes": [
