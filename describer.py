@@ -68,6 +68,9 @@ def main(
                 ):
                     continue
             spec = importlib.util.spec_from_file_location("Migration", migration_path)
+            if not spec:
+                click.secho(f" => Skipping {migration_path}", err=True)
+                continue
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             klass = mod.Migration
