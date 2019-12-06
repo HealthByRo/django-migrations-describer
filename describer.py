@@ -57,6 +57,9 @@ def main(
         if "/migrations/" in index.b_path:
             if "__init__.py" in index.b_path:
                 continue
+            if not index.b_path.endswith(".py"):
+                # process only python files
+                continue
 
             migration_path = os.path.join(path, index.b_path)
             module_name, _, migration_name = index.b_path[:-3].split("/")[:3]
@@ -68,9 +71,6 @@ def main(
                 ):
                     continue
             spec = importlib.util.spec_from_file_location("Migration", migration_path)
-            if not spec:
-                click.secho(f" => Skipping {migration_path}", err=True)
-                continue
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             klass = mod.Migration
